@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pley</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <%- include('partials/header') -%>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m8">
+                <h3><%=clientPosted.name%> <a href="/post/edit/<%=post._id%>"><i class="btn-fade fa-solid fa-edit"></i></a></h3>
+                <div class="card">
+                    <% if (poster.id == user.id) { %>
+                    <div class="right">
+                        <form
+                            class="form-likes"
+                            action="/post/delete/<%=post._id%>?_method=DELETE"
+                            method="POST"
+                          ><button class="btn-fade fa-solid fa-trash" type="submit"></button>
+                        </form> 
+                    </div>
+                    <% } %>
+                    <div class="card-content">
+                        <span class="card-title"><%=post.title%></span>
+                        <%=post.story%>
+                    </div>
+                    <div class="card-content">
+                        <p>Rating: 
+                        <% for(let i = 0; i < post.stars; i++) { %>
+                            <i class="btn-fade fa-solid fa-star"></i>
+                        <% } %>
+                        </p>
+                    </div>
+                    <div class="card-content move2">
+                        <p><form
+                            class="form-likes"
+                            action="/post/like/<%=post._id%>?_method=PUT"
+                            method="POST"
+                          ><button class="btn-fade fa-solid fa-heart" type="submit"></button>
+                        </form> <%=post.likes%> likes</p>
+                    </div>
+                </div>
+                <form action="/comment/create/<%=post._id%>" method="POST">
+                    <div class="row">
+                      <h5>Comments</h5>
+                      <div class="input-field col s12">
+                        <textarea id="comment" class="materialize-textarea" name="comment"></textarea>
+                        <label for="comment">Your comment</label>
+                      </div>
+                      <button class="btn waves-effect waves-light blue" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                      </button>
+                    </div>
+                  </form>
+                  <% for (let i = 0; i < comments.length; i++) {%> 
+                    <div class="divider"></div>
+                    <div class="section">
+                        <% if (comments[i].posterId == user.id) { %>
+                            <div class="right">
+                                <form
+                                    class="form-likes"
+                                    action="/comment/delete/<%=comments[i]._id%>/<%=comments[i].postId%>?_method=DELETE"
+                                    method="POST"
+                                  ><button class="btn-fade fa-solid fa-trash" type="submit"></button>
+                                </form> 
+                            </div>
+                        <% } %>
+                      <h6><%=commenters[i].displayName%></h6>
+                      <p><%=comments[i].comment%></p>
+                      <p><form
+                          class="form-likes"
+                          action="/comment/like/<%=comments[i]._id%>?_method=PUT"
+                          method="POST"
+                        ><button class="btn-fade fa-solid fa-heart" type="submit"></button>
+                      </form> <%=comments[i].likes%> likes</p>
+                    </div>
+                    <div class="divider"></div>
+                <% } %> 
+            </div>
+            
+            <div class="col s12 m4">
+                <h3>Client</h3>
+                <div class="card center-align">
+                    <div class="card-content">
+                        <span class="card-title"><%=clientPosted.name%></span>
+                    </div>
+                    <div class="divider"></div>
+                    <% if (clientPosted.email) { %>
+                    <div class="card-content">
+                        <span class="card-title"><%=clientPosted.email%></span>
+                    </div>
+                    <% } %>
+                    <div class="divider"></div>
+                    <% if (clientPosted.phone) { %>
+                        <div class="card-content">
+                            <span class="card-title"><%=clientPosted.phone%></span>
+                        </div>
+                        <% } %>
+                    <div class="divider"></div>
+                    <div class="card-action">
+                        <a href="/reviews/<%=clientPosted._id%>">More Reviews For <%=clientPosted.name%></a>
+                    </div>
+                </div>
+                <% if(post.anonymous === false) { %>
+                <h3>Reviewer</h3>
+                <div class="card center-align">
+                    <div class="card-content">
+                        <span class="card-title"><%=poster.displayName%></span>
+                    </div>
+                    <div class="divider"></div>
+                    <% if (poster.occupation) { %>
+                    <div class="card-content">
+                        <span class="card-title"><%=poster.occupation%></span>
+                    </div>
+                    <% } %>
+                    <div class="divider"></div>
+                    <% if (poster.industry) { %>
+                        <div class="card-content">
+                            <span class="card-title"><%=poster.industry%></span>
+                        </div>
+                    <% } %>
+                    <div class="divider"></div>
+                    <div class="card-action">
+                        <a href="/profile/<%=post.posterId%>">More From <%=poster.displayName%></a>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script> 
+        M.Sidenav.init(document.querySelector('.sidenav'))
+    </script>
+  </body>
+</html>

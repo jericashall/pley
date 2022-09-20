@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pley</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <%- include('partials/header') -%>
+    <div class="container">
+        <% if (phoneReviews.length === 0) {%>
+            <p>No results found for <%=phone%></p>
+        <%} else { %>
+       <h4 class="center">Reviews for <%=phone%></h4>
+       <%}%> 
+        <div class="row">
+            <%for(let i = 0; i < phoneReviews.length; i++) {%>
+            <div class="col s12 m4">
+                <div class="card">
+                   <div class="card-image">
+                    <p><form
+                        class="form-likes"
+                        action="/post/like/<%=phoneReviews[i]._id%>?_method=PUT"
+                        method="POST"
+                      ><button class="btn-fade fa-solid fa-heart" type="submit"></button>
+                    </form> <%=phoneReviews[i].likes%> likes</p>
+                   </div>
+                   <div class="card-content center-align">
+                       <h5><%=phoneReviews[i].title%></h5>
+                      <p><%=phoneReviews[i].story%></p>
+                      <br>
+                   </div>
+                  <div class="card-action center-align">
+                      <a href="/post/<%=phoneReviews[i]._id%>" class="btn grey">View Full Review</a>
+                   </div>
+               </div>
+           </div>
+           <%}%>
+        </div>
+        <% if (emailReviews.length === 0) {%>
+            <p>No results found for <%=email%></p>
+        <%} else { %>
+       <h4 class="center">Reviews for <%=email%></h4>
+       <%}%> 
+        <div class="row">
+            <%for(let j = 0; j < emailReviews.length; j++) {%>
+            <div class="col s12 m4">
+                <div class="card">
+                   <div class="card-image">
+                    <p><form
+                        class="form-likes"
+                        action="/post/like/<%=emailReviews[j]._id%>?_method=PUT"
+                        method="POST"
+                      ><button class="btn-fade fa-solid fa-heart" type="submit"></button>
+                    </form> <%=emailReviews[j].likes%> likes</p>
+                   </div>
+                   <div class="card-content center-align">
+                       <h5><%=emailReviews[j].title%></h5>
+                      <p><%=emailReviews[j].story%></p>
+                      <br>
+                   </div>
+                  <div class="card-action center-align">
+                      <a href="/post/<%=emailReviews[j]._id%>" class="btn grey">View Full Review</a>
+                   </div>
+               </div>
+           </div>
+           <%}%>
+        </div>
+            <% if (nameReviews.length === 0) {%>
+                <p>No results found for <%=name%></p>
+            <%} else { %>
+           <h4 class="center">Reviews for <%=name%></h4>
+           <%}%> 
+           <div class="row">
+               <%for(let k = 0; k < nameReviews.length; k++) {%>
+               <div class="col s12 m4">
+                   <div class="card">
+                      <div class="card-image">
+                        <p><form
+                            class="form-likes"
+                            action="/post/like/<%=nameReviews[k]._id%>?_method=PUT"
+                            method="POST"
+                          ><button class="btn-fade fa-solid fa-heart" type="submit"></button>
+                        </form> <%=nameReviews[k].likes%> likes</p>
+                      </div>
+                      <div class="card-content center-align">
+                          <h5><%=nameReviews[k].title%></h5>
+                         <p><%=nameReviews[k].story%></p>
+                         <br>
+                      </div>
+                     <div class="card-action center-align">
+                         <a href="/post/<%=nameReviews[k]._id%>" class="btn grey">View Full Review</a>
+                      </div>
+                  </div>
+              </div>
+              <%}%>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script> 
+      M.Sidenav.init(document.querySelector('.sidenav'))
+    </script>
+  </body>
+</html>

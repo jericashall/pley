@@ -1,0 +1,49 @@
+.pop-out {
+    border: 2px solid grey;
+    margin-top: 10%;
+    padding: 5%;
+    border-radius: 10px;
+}
+
+.fa-heart {
+    color: red;
+}
+
+.move {
+    margin: 10% 0;
+}
+
+.btn-fade {
+    border: none;
+    color: none;
+    background: none;
+    box-shadow: none;
+}
+
+.btn-fade:hover {
+    color: none;
+    background: none;
+    box-shadow: none;
+}
+
+.form-likes {
+    display: inline-block;
+}
+
+.move2 {
+    display: flex;
+    justify-content: center;
+}
+
+.alert {
+    color: red;
+    text-transform: uppercase;
+}
+
+.fa-star {
+    color: yellow;
+}
+
+.fa-trash {
+    color: grey;
+}

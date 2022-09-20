@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pley</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <%- include('partials/header') -%>
+    <div class="container">
+      <div class="row">
+        <div class="col s2">
+            <% if (viewer.id == user.id) { %>
+            <a class="btn-floating btn-large waves-effect waves-light blue move" href="/profile/edit/<%=user._id%>"><i class="material-icons">edit</i></a>
+            <% } %>
+            <div class="pop-out">
+                <div class="section">
+                  <h6>Name</h6>
+                  <p><%=user.displayName%></p>
+                </div>
+                 <div class="divider"></div>
+                <div class="section">
+                  <h6>Occupation</h6>
+                  <p><%=user.occupation%></p>
+                </div>
+                <div class="divider"></div>
+                <div class="section">
+                  <h6>Industry</h6>
+                  <p><%=user.industry%></p>
+                </div>
+                <div class="divider"></div>
+            </div>
+        </div>
+        <div class="col s8">
+          <% if (posts.length === 0) { %>
+            <h5 class="center">THIS USER DOES NOT HAVE ANY POSTS YET</h5>
+            <div class="divider"></div>
+          <% } %>
+          <% for (let i = 0; i < posts.length; i++) {%> 
+          <div class="divider"></div>
+          <div class="section">
+            <h5><%=posts[i].title%></h5>
+            <% for (let j = 0; j < posts[i].stars; j++) {%> 
+              <i class="btn-fade fa-solid fa-star"></i>
+            <% } %> 
+            <p><%=posts[i].story%></p>
+            <p><form
+                class="form-likes"
+                action="/post/like/<%=posts[i]._id%>?_method=PUT"
+                method="POST"
+              ><button class="btn-fade fa-solid fa-heart" type="submit"></button>
+            </form> <%=posts[i].likes%> likes</p>
+            <a href="/post/<%=posts[i]._id%>">view full story</a>
+          </div>
+          <div class="divider"></div>
+          <% } %> 
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script> 
+      M.Sidenav.init(document.querySelector('.sidenav'))
+    </script>
+  </body>
+</html>
