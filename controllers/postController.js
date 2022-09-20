@@ -70,8 +70,14 @@ module.exports  = {
             }
 
             const number = normalizeNumber(req.body.phone)
-            const emailCheck = await Client.findOne({email: req.body.email})
-            const phoneCheck = await Client.findOne({phone: number})
+            let emailCheck 
+            if(req.body.email) { 
+                await Client.findOne({email: req.body.email})
+            }
+            let phoneCheck
+            if (req.body.phone) {
+                await Client.findOne({phone: number})
+            }
             let client = emailCheck || phoneCheck
             if(client) {
                 if(req.body.email && req.body.email !== client.email) {

@@ -42,6 +42,7 @@
             <div class="divider"></div>
           <% } %>
           <% for (let i = 0; i < posts.length; i++) {%> 
+            <% if (posts[i].anonymous === false) {%>
           <div class="divider"></div>
           <div class="section">
             <h5><%=posts[i].title%></h5>
@@ -58,6 +59,7 @@
             <a href="/post/<%=posts[i]._id%>">view full story</a>
           </div>
           <div class="divider"></div>
+          <% } %> 
           <% } %> 
         </div>
     </div>

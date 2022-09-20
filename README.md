@@ -12,7 +12,6 @@ Pley is a reverse yelp designed to help workers in service industries leave and 
 This is a full-stack application using express and node.js on the backend with an MVC architecture. For the front-end ejs controls all of the views and css and materialize are responsible for styling the app.
 
 ## Optimizations
-*(optional)*
 
 Allow reviewers to add before and after pictures of their work done for clients.
 
