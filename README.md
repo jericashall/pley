@@ -3,7 +3,7 @@ Pley is a reverse yelp designed to help workers in service industries leave and 
 
 **Link to project:** coming soon
 
-![alt tag](http://placecorgi.com/1200/650)
+![Pley dashboard](https://github.com/jericashall/pley/blob/main/demopic.jpg)
 
 ## How It's Made:
 
