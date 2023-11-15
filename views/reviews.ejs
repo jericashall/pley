@@ -13,7 +13,9 @@
   <body>
     <%- include('partials/header') -%>
     <div class="container">
-        <% if (phoneReviews.length === 0) {%>
+        <% if (!phone) {%>
+                
+        <%} else if (phoneReviews.length === 0 && phone) {%>
             <p>No results found for <%=phone%></p>
         <%} else { %>
        <h4 class="center">Reviews for <%=phone%></h4>
@@ -42,7 +44,9 @@
            </div>
            <%}%>
         </div>
-        <% if (emailReviews.length === 0) {%>
+        <% if (!email) {%>
+                
+        <%} else if (emailReviews.length === 0 && email) {%>
             <p>No results found for <%=email%></p>
         <%} else { %>
        <h4 class="center">Reviews for <%=email%></h4>
@@ -71,7 +75,9 @@
            </div>
            <%}%>
         </div>
-            <% if (nameReviews.length === 0) {%>
+            <% if (!name) {%>
+                
+            <%} else if (nameReviews.length === 0) {%>
                 <p>No results found for <%=name%></p>
             <%} else { %>
            <h4 class="center">Reviews for <%=name%></h4>

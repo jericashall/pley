@@ -11,9 +11,11 @@ module.exports = {
             const phone = normalizeNumber(req.body.phone)
             const email = req.body.email
             const name = req.body.name
-            const phoneClient = await Client.findOne({phone: phone}).lean()
-            const emailClient = await Client.findOne({email: email}).lean()
-            const nameClient = await Client.findOne({name: name}).lean()
+            const searchName = `(?i)${name[0]}(?-i)${name.substring(1)}`
+            //const name = req.body.name
+            const phoneClient = phone ? await Client.findOne({phone: phone}).lean() : ""
+            const emailClient = email ? await Client.findOne({email: email}).lean() : ""
+            const nameClient = name ? await Client.findOne({name: { $regex: searchName }}).lean() : ""
             let phoneReviews = []
             let emailReviews = []
             let nameReviews = []
@@ -28,7 +30,7 @@ module.exports = {
             }
             res.render('reviews.ejs', {phone: phone, email: email, name: name, phoneReviews: phoneReviews,  emailReviews: emailReviews, nameReviews: nameReviews})
         }catch(err){
-            console.err(err)
+            console.log(err)
         }
     },
     userReviews: async (req, res) => {
